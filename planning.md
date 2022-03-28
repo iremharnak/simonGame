@@ -16,7 +16,7 @@ there will be a time limit for the user to put input
 -at the end of this timeout user needs to input
 
 1- show Sequence {
-  showCOlor(take in a color, showing the animation- visual side)- this will run through looping through the array
+  showColor(take in a color, showing the animation- visual side)- this will run through looping through the array
 
 }
 2- validateTurn {

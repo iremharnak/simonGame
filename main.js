@@ -33,12 +33,14 @@ resetBtn.addEventListener('click', resetGame);
 
 // initilize full sequence, board & game
 function init() {
-  generateSimon();
+  simonPattern = [];
   userPattern = [];
   userClick = 0;
   turn = 1;
+  generateSimon();
+  
 }
-// 1st generate seq (all the moves the computer will do) 
+// 1st generate simon seq (all the moves the computer will do) 
 function generateSimon() {
   for (let i = 0; i < 10; i++) {
     let randomNumber = getRandomNumber();
@@ -46,15 +48,16 @@ function generateSimon() {
   }
   console.log(simonPattern);
 }
+// generating random number for simon
+function getRandomNumber() {
+  return Math.floor(Math.random() * 4);
+}
+
 // start btn function
 function startGame() {
   showSequence();
 }
 
-// generating random number
-function getRandomNumber() {
-return Math.floor(Math.random() * 4);
-}
 
 // 2nd how can i have the computer show 1, (turn logic)
 // showSequence();
@@ -65,13 +68,17 @@ for (let i = 0; i <turn; i++) {
     console.log(timeToTrigger)
     if (simonPattern[i]=== "red") {
       setTimeout(addRedGlow(),timeToTrigger);
+      
     } else if (simonPattern[i]=== "green") {
       setTimeout(addGreenGlow(),timeToTrigger);
+      
     } else if (simonPattern[i]=== "blue") {
       setTimeout(addBlueGlow(), timeToTrigger);
     } else {
       setTimeout(addYellowGlow(),timeToTrigger);
     }
+    // setTimeout(removeGlow(), 10000);
+
   }
   console.log(turn);
 }
@@ -91,7 +98,7 @@ function validateTurn() {
 //   // userClick++;
   
 // }
-
+// record user input + put it in an array
 function takeUserInput(e) {
   if (e.target.id === "red") {
     addRedGlow();
@@ -113,7 +120,7 @@ function takeUserInput(e) {
   console.log(userPattern);
   console.log(userClick);
 }
-
+// compare user input with simon seq
 function checkPatterns() {
   for (let i = 0; i < userPattern.length; i++) {
     if (userPattern[i] !== simonPattern[i]) {
@@ -156,6 +163,7 @@ function removeGlow() {
   removeYellowGlow();
   removeBlueGlow();
   removeGreenGlow();
+  console.log('calisti')
 }
 function removeGreenGlow(){
   greenBtn.classList.remove("green-anima");
@@ -164,14 +172,16 @@ function removeYellowGlow(){
   yellowBtn.classList.remove("yellow-anima");
 }
 function removeRedGlow(){
-  redBtn.classList.add("red-anima");
+  redBtn.classList.remove("red-anima");
 }
 function removeBlueGlow(){
-  blueBtn.classList.add("blue-anima");
+  blueBtn.classList.remove("blue-anima");
 }
 
 function resetGame() {
+  removeRedGlow();
   init();
+  console.log("once")
 }
 
 init();
