@@ -2,11 +2,11 @@
   const simonBoard = ["red", "green", "blue", "yellow"];
 
 /*----- app's state (variables) -----*/
-// simonPatterns will hold all the sequences randomly generated with init
-let simonPatterns = [];
-let userPatterns = [];
-let currentPlayer, round, userClick;
-let computerMove = true;
+// simonPattern will hold all the sequences randomly generated with init
+let simonPattern = [];
+let userPattern = [];
+let userClick = 0;
+let turn = 1;
 /*----- cached element references -----*/
 // board buttons
 const redBtn = document.getElementById("red");
@@ -22,55 +22,156 @@ const startBtn = document.getElementById("startBtn");
 const resetBtn = document.getElementById("resetBtn");
 
 /*----- event listeners -----*/
-// board eventListeners
-// startBtn.addEventListener('click',)
+redBtn.addEventListener('click', takeUserInput);
+greenBtn.addEventListener('click', takeUserInput);
+blueBtn.addEventListener('click', takeUserInput);
+yellowBtn.addEventListener('click', takeUserInput);
+startBtn.addEventListener('click', startGame);
+resetBtn.addEventListener('click', resetGame);
+
 /*----- functions -----*/
 
+// initilize full sequence, board & game
 function init() {
   generateSimon();
-  console.log(simonPatterns);
-  
+  userPattern = [];
+  userClick = 0;
+  turn = 1;
 }
-// creating the whole simon sequence
+// 1st generate seq (all the moves the computer will do) 
 function generateSimon() {
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     let randomNumber = getRandomNumber();
-    simonPatterns.push(simonBoard[randomNumber]);
+    simonPattern.push(simonBoard[randomNumber]);
   }
-  console.log(simonPatterns);
+  console.log(simonPattern);
+}
+// start btn function
+function startGame() {
+  showSequence();
 }
 
-generateSimon()
 // generating random number
 function getRandomNumber() {
 return Math.floor(Math.random() * 4);
 }
 
-// in the init create the sequence red red blue etc (done)
-// the seq is ready (done)
-// the computer will compare an element from what's already been generated
-// you're incrementing computer's turn and it will show the next colour in the sequence
-// a function to setIntervals (make red, wait one sec, show green, etc)
-// 1st generate seq (all the moves the computer will do) (done)
 // 2nd how can i have the computer show 1, (turn logic)
-showSequence();
+// showSequence();
 function showSequence() {
-if (computerMove) {
+for (let i = 0; i <turn; i++) {
+    console.log(simonPattern[i])
+    let timeToTrigger = i * 1000;
+    console.log(timeToTrigger)
+    if (simonPattern[i]=== "red") {
+      setTimeout(addRedGlow(),timeToTrigger);
+    } else if (simonPattern[i]=== "green") {
+      setTimeout(addGreenGlow(),timeToTrigger);
+    } else if (simonPattern[i]=== "blue") {
+      setTimeout(addBlueGlow(), timeToTrigger);
+    } else {
+      setTimeout(addYellowGlow(),timeToTrigger);
+    }
+  }
+  console.log(turn);
+}
+// set the turn after showSequence (turn++);
+
+
+
+function validateTurn() {
+  // once the sequence's delivered wait for input, if nothing for 10sec -> gameOver
+  let inputTimer = setTimeout(gameOver(), 10000);
+  checkPatterns();
+  console.log('it is working')
+  clearTimeout(inputTimer);
+}
+
+// function checkColor() {
+//   // userClick++;
   
+// }
+
+function takeUserInput(e) {
+  if (e.target.id === "red") {
+    addRedGlow();
+    userPattern.push(e.target.id);
+    userClick++;
+  } else if (e.target.id === "green") {
+    addGreenGlow();
+    userPattern.push(e.target.id);
+    userClick++;
+  } else if (e.target.id === "blue") {
+    addBlueGlow();
+    userPattern.push(e.target.id);
+    userClick++;
+  } else {
+    addYellowGlow();
+    userPattern.push(e.target.id);
+    userClick++;
+  }
+  console.log(userPattern);
+  console.log(userClick);
 }
+
+function checkPatterns() {
+  for (let i = 0; i < userPattern.length; i++) {
+    if (userPattern[i] !== simonPattern[i]) {
+      gameOver();
+    } else {
+      nextLvlCongrats();
+      // clearTimeout(gameOver(), 10000);
+    }
+  }
 }
-// variable indicating who's turn it is to see if user is done and another variable how many times the user clicked so far in this round (if x amount of clicks done user can't click) another one for round (round one user's allowed to click once, round 5 user is allowed 5 clicks)
 
+// set the turn after showSequence (turn++);
+// set timeout
+// receive user input
 
-// 1- 'start' triggers eventListener
-// 2- run 
-        // 1. randomNumberToColor() (which will run randomNumberToColor() 1st)
-        // 2. wait for user input (setInterval?)
-        // var intervalID = setInterval(function[, delay]);
-// 3- Update promptTxt innerHTML to "it's your turn"
-// 4- Activate (eventListener)s for the board 
-// 5-With user's click, take the input and put it inside the userInput array
-// 6- Is the UserInput done? (how to check?)
-// 7- If done, compare userInput arr with simonPatterns
+function nextLvlCongrats() {
+  promptTxt.textContent = "GREAT! ON TO THE NEXT!";
+}
+function gameOver() {
+  promptTxt.textContent = "BUMMER!  HIT RESET TO  TRY AGAIN";
+}
 
+// button animation functions
+// add glow class
+function addGreenGlow(){
+  greenBtn.classList.add("green-anima");
+}
+function addYellowGlow(){
+  yellowBtn.classList.add("yellow-anima");
+}
+function addRedGlow(){
+  redBtn.classList.add("red-anima");
+}
+function addBlueGlow(){
+  blueBtn.classList.add("blue-anima");
+}
+// remove glow class
+function removeGlow() {
+  removeRedGlow();
+  removeYellowGlow();
+  removeBlueGlow();
+  removeGreenGlow();
+}
+function removeGreenGlow(){
+  greenBtn.classList.remove("green-anima");
+}
+function removeYellowGlow(){
+  yellowBtn.classList.remove("yellow-anima");
+}
+function removeRedGlow(){
+  redBtn.classList.add("red-anima");
+}
+function removeBlueGlow(){
+  blueBtn.classList.add("blue-anima");
+}
 
+function resetGame() {
+  init();
+}
+
+init();

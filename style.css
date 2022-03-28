@@ -125,7 +125,7 @@ h1 {
   }
   50% {
     background-color: #F94545;
-    box-shadow: 0 0 10px #F94545;
+    box-shadow: 0 0 25px #F94545;
   }
   100% {
     background-color: #F94545;
@@ -140,7 +140,7 @@ h1 {
   }
   50% {
     background-color: #80EA76;
-    box-shadow: 0 0 10px #80EA76;
+    box-shadow: 0 0 25px #80EA76;
   }
   100% {
     background-color: #80EA76;
@@ -155,7 +155,7 @@ h1 {
   }
   50% {
     background-color: #40CEEE;
-    box-shadow: 0 0 10px #40CEEE;
+    box-shadow: 0 0 25px #40CEEE;
   }
   100% {
     background-color: #40CEEE;
@@ -170,7 +170,7 @@ h1 {
   }
   50% {
     background-color: #F6E22F;
-    box-shadow: 0 0 10px #F6E22F;
+    box-shadow: 0 0 25px #F6E22F;
   }
   100% {
     background-color: #F6E22F;
