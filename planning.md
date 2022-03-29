@@ -16,18 +16,22 @@
 there will be a 10sec time limit for the user to put input
 
 
-1- show Sequence {
-  showColor(take in a color, showing the animation- visual side)- this will run through looping through the array
-
+1- showSequence() {
+  Function triggered by startGame() click function
+ (take in a color, show the animation- visual side)- this will run through looping through the array
 }
 2- validateTurn {
-   settimeout(what do i need to do after the seq is delivered-showing gameover after 10sec-this will have the gameOver())
-  checkPatterns(there has to be userClick and keep track & update the clicks - resets at the end of every turn 1- did user mess up? if yes trigger GameOver(), 2- did they successfully complete? cleartimeout?, cancel the bomb)
-}
-3- is it turn 10 {
-  do they need to go another round or is it done?
+  turn++;
+  setTimeout (waiting for user input)
   
+   settimeout(what do i need to do after the seq is delivered-showing gameover after 10sec-this will have the gameOver())
+  checkPatterns(there has to be userClick and keep track & update the clicks - resets at the end of every turn 1- did user mess up? if yes trigger GameOver(), 2- did they successfully complete? cleartimeout, cancel the bomb)
 }
+3- winner() {
+  do they need to go another round or is it done?
+}
+
+
 which one comes first?
 // set the turn after showSequence (turn++);
 // set timeout

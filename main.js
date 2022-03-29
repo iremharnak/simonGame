@@ -57,6 +57,7 @@ function getRandomNumber() {
 // start btn function
 function startGame() {
   showSequence();
+  
 }
 
 
@@ -87,11 +88,13 @@ for (let i = 0; i < turn; i++) {
 
 // set 10sec timeout to wait for userInput, once input is given check it, if correct move to the next round by turn++ & cleartimeout
 function validateTurn() {
+  turn++;
+  console.log(turn);
   // once the sequence's delivered wait for input, if nothing for 10sec -> gameOver
   let inputTimer = setTimeout(gameOver(), 10000);
   // 1st check if it's correct pattern, if yes increment
-  checkPatterns();
-  // turn++;
+  // checkPatterns();
+  // takeUserInput(e);
   clearTimeout(inputTimer);
   console.log('it is working');
 }
@@ -118,6 +121,7 @@ function takeUserInput(e) {
   }
   console.log(userPattern);
   console.log(userClick);
+  checkPatterns();
 }
 
 // compare user input with simon sequence, if they don't match -> gameOver(), if they do -> nextLvlCongrats() + increment turn, reset userClick
@@ -129,14 +133,15 @@ function checkPatterns() {
     } else {
       nextLvlCongrats();
       userClick = 0;
-      turn++;
+      console.log(userClick);
+      // turn++;
       // clearTimeout(gameOver(), 10000);
     }
   }
 }
 
 // check if user finished the game or not - max turn is 10
-function isTurn10() {
+function winner() {
   if (userPattern.length >= turn) {
     gameWon();
     return true;
