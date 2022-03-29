@@ -44,9 +44,10 @@ function init() {
 function generateSimon() {
   for (let i = 0; i < 10; i++) {
     let randomNumber = getRandomNumber();
-    simonPattern.push(simonBoard[randomNumber]);
+     simonPattern.push(simonBoard[randomNumber]);
   }
-  console.log(simonPattern);
+  console.log(simonPattern); 
+  return simonPattern;
 }
 // generating random number for simon
 function getRandomNumber() {
@@ -62,43 +63,41 @@ function startGame() {
 // 2nd how can i have the computer show 1, (turn logic)
 // showSequence();
 function showSequence() {
-for (let i = 0; i <turn; i++) {
+for (let i = 0; i < turn; i++) {
     console.log(simonPattern[i])
     let timeToTrigger = i * 1000;
     console.log(timeToTrigger)
     if (simonPattern[i]=== "red") {
-      setTimeout(addRedGlow(),timeToTrigger);
-      
+      // 1000 delay
+      setTimeout(addRedGlow(),timeToTrigger); 
     } else if (simonPattern[i]=== "green") {
+      // 2000 delay
       setTimeout(addGreenGlow(),timeToTrigger);
-      
     } else if (simonPattern[i]=== "blue") {
+      // 3000 delay
       setTimeout(addBlueGlow(), timeToTrigger);
     } else {
       setTimeout(addYellowGlow(),timeToTrigger);
     }
     // setTimeout(removeGlow(), 10000);
-
   }
   console.log(turn);
 }
-// set the turn after showSequence (turn++);
 
 
-
+// set 10sec timeout to wait for userInput, once input is given check it, if correct move to the next round by turn++ & cleartimeout
 function validateTurn() {
   // once the sequence's delivered wait for input, if nothing for 10sec -> gameOver
   let inputTimer = setTimeout(gameOver(), 10000);
+  // 1st check if it's correct pattern, if yes increment
   checkPatterns();
-  console.log('it is working')
+  // turn++;
   clearTimeout(inputTimer);
+  console.log('it is working');
 }
 
-// function checkColor() {
-//   // userClick++;
-  
-// }
-// record user input + put it in an array
+
+// record user input + put it in userPattern array & increment userClicks
 function takeUserInput(e) {
   if (e.target.id === "red") {
     addRedGlow();
@@ -120,21 +119,29 @@ function takeUserInput(e) {
   console.log(userPattern);
   console.log(userClick);
 }
-// compare user input with simon seq
+
+// compare user input with simon sequence, if they don't match -> gameOver(), if they do -> nextLvlCongrats() + increment turn, reset userClick
 function checkPatterns() {
   for (let i = 0; i < userPattern.length; i++) {
     if (userPattern[i] !== simonPattern[i]) {
       gameOver();
+      userClick = 0;
     } else {
       nextLvlCongrats();
+      userClick = 0;
+      turn++;
       // clearTimeout(gameOver(), 10000);
     }
   }
 }
 
-// set the turn after showSequence (turn++);
-// set timeout
-// receive user input
+// check if user finished the game or not - max turn is 10
+function isTurn10() {
+  if (userPattern.length >= turn) {
+    gameWon();
+    return true;
+  }
+}
 
 function nextLvlCongrats() {
   promptTxt.textContent = "GREAT! ON TO THE NEXT!";
@@ -142,7 +149,9 @@ function nextLvlCongrats() {
 function gameOver() {
   promptTxt.textContent = "BUMMER!  HIT RESET TO  TRY AGAIN";
 }
-
+function gameWon() {
+  promptTxt.textContent = "CONGRATS! YOU WON!";
+}
 // button animation functions
 // add glow class
 function addGreenGlow(){
@@ -178,8 +187,9 @@ function removeBlueGlow(){
   blueBtn.classList.remove("blue-anima");
 }
 
+// reset the game
 function resetGame() {
-  removeRedGlow();
+  removeGlow();
   init();
   console.log("once")
 }
