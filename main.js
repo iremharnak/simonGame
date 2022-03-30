@@ -6,7 +6,7 @@
 let simonPattern = [];
 let userPattern = [];
 let userClick = 0;
-let turn = 1;
+let round = 1;
 /*----- cached element references -----*/
 // board buttons
 const redBtn = document.getElementById("red");
@@ -36,7 +36,7 @@ function init() {
   simonPattern = [];
   userPattern = [];
   userClick = 0;
-  turn = 1;
+  round = 1;
   generateSimon();
   
 }
@@ -64,44 +64,55 @@ function startGame() {
 // 2nd how can i have the computer show 1, (turn logic)
 // showSequence();
 function showSequence() {
-for (let i = 0; i < turn; i++) {
+for (let i = 0; i < 6; i++) {
+  removeGlow();
     console.log(simonPattern[i])
-    let timeToTrigger = i * 1000;
-    console.log(timeToTrigger)
+    // let timeToTrigger = i * 1000;
+    // console.log(timeToTrigger)
     if (simonPattern[i]=== "red") {
-      // 1000 delay
-      setTimeout(addRedGlow(),timeToTrigger); 
+      // 0
+      // setTimeout(addRedGlow,timeToTrigger); 
+      setTimeout(addRedGlow, 0); 
+      
     } else if (simonPattern[i]=== "green") {
-      // 2000 delay
-      setTimeout(addGreenGlow(),timeToTrigger);
+      // 1
+      // setTimeout(addGreenGlow,timeToTrigger);
+      setTimeout(addGreenGlow,500);
+
     } else if (simonPattern[i]=== "blue") {
-      // 3000 delay
-      setTimeout(addBlueGlow(), timeToTrigger);
+      // 2
+      // setTimeout(addBlueGlow, timeToTrigger);
+      setTimeout(addBlueGlow, 1000);
+      // setTimeout(removeBlueGlow,2500); 
     } else {
-      setTimeout(addYellowGlow(),timeToTrigger);
+      // 3
+      // setTimeout(addYellowGlow,timeToTrigger);
+      setTimeout(addYellowGlow,1500);
+      // setTimeout(removeYellowGlow,3500);
     }
-    // setTimeout(removeGlow(), 10000);
   }
-  console.log(turn);
+  // removeGlow();
+  console.log(round);
 }
 
 
-// set 10sec timeout to wait for userInput, once input is given check it, if correct move to the next round by turn++ & cleartimeout
-function validateTurn() {
-  turn++;
-  console.log(turn);
-  // once the sequence's delivered wait for input, if nothing for 10sec -> gameOver
-  let inputTimer = setTimeout(gameOver(), 10000);
-  // 1st check if it's correct pattern, if yes increment
-  // checkPatterns();
-  // takeUserInput(e);
-  clearTimeout(inputTimer);
-  console.log('it is working');
-}
+// set 10sec timeout to wait for userInput, once input is given check it, if correct move to the next round by round++ & cleartimeout
+// function validateTurn() {
+//   round++;
+//   console.log(round);
+//   // once the sequence's delivered wait for input, if nothing for 10sec -> gameOver
+//   let inputTimer = setTimeout(gameOver, 10000);
+//   // 1st check if it's correct pattern, if yes increment
+//   // checkPatterns();
+//   // takeUserInput(e);
+  
+//   console.log('it is working');
+// }
 
 
 // record user input + put it in userPattern array & increment userClicks
 function takeUserInput(e) {
+  removeGlow();
   if (e.target.id === "red") {
     addRedGlow();
     userPattern.push(e.target.id);
@@ -121,7 +132,8 @@ function takeUserInput(e) {
   }
   console.log(userPattern);
   console.log(userClick);
-  checkPatterns();
+  // checkPatterns();
+  // whatever you want to use from here take it as a variable and put it in validateTurn
 }
 
 // compare user input with simon sequence, if they don't match -> gameOver(), if they do -> nextLvlCongrats() + increment turn, reset userClick
@@ -134,20 +146,24 @@ function checkPatterns() {
       nextLvlCongrats();
       userClick = 0;
       console.log(userClick);
-      // turn++;
-      // clearTimeout(gameOver(), 10000);
+      round++;
+      console.log(round);
     }
   }
+  removeGlow();
 }
 
 // check if user finished the game or not - max turn is 10
-function winner() {
-  if (userPattern.length >= turn) {
+function checkWinner() {
+  if (userPattern.length >= simonPattern.length) {
+    // you need another variable like maxTurn
+    // or >= simonPatterns.length
     gameWon();
     return true;
   }
 }
 
+// functions updating promptTxt
 function nextLvlCongrats() {
   promptTxt.textContent = "GREAT! ON TO THE NEXT!";
 }
@@ -177,7 +193,7 @@ function removeGlow() {
   removeYellowGlow();
   removeBlueGlow();
   removeGreenGlow();
-  console.log('calisti')
+  console.log('removing class')
 }
 function removeGreenGlow(){
   greenBtn.classList.remove("green-anima");
