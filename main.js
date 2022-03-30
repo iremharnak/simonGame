@@ -64,30 +64,36 @@ function startGame() {
 // 2nd how can i have the computer show 1, (turn logic)
 // showSequence();
 function showSequence() {
-for (let i = 0; i < 6; i++) {
-  removeGlow();
+for (let i = 0; i < round; i++) {
+  // removeGlow();
     console.log(simonPattern[i])
     // let timeToTrigger = i * 1000;
     // console.log(timeToTrigger)
     if (simonPattern[i]=== "red") {
       // 0
       // setTimeout(addRedGlow,timeToTrigger); 
-      setTimeout(addRedGlow, 0); 
-      
+      // setTimeout(addRedGlow,0); 
+      setTimeout(addRedGlow,0); 
+      setTimeout(removeRedGlow,1000); 
     } else if (simonPattern[i]=== "green") {
       // 1
       // setTimeout(addGreenGlow,timeToTrigger);
+      // setTimeout(addGreenGlow,500);
       setTimeout(addGreenGlow,500);
-
+      setTimeout(removeGreenGlow,1000);
     } else if (simonPattern[i]=== "blue") {
       // 2
       // setTimeout(addBlueGlow, timeToTrigger);
-      setTimeout(addBlueGlow, 1000);
+      // setTimeout(addBlueGlow, 1000);
+      setTimeout(addBlueGlow,1000);
+      setTimeout(removeBlueGlow,1500);
       // setTimeout(removeBlueGlow,2500); 
     } else {
       // 3
       // setTimeout(addYellowGlow,timeToTrigger);
+      // setTimeout(addYellowGlow,1500);
       setTimeout(addYellowGlow,1500);
+      setTimeout(removeYellowGlow,2000);
       // setTimeout(removeYellowGlow,3500);
     }
   }
@@ -114,19 +120,27 @@ for (let i = 0; i < 6; i++) {
 function takeUserInput(e) {
   removeGlow();
   if (e.target.id === "red") {
-    addRedGlow();
+    // addRedGlow();
+    setTimeout(addRedGlow,0); 
+    setTimeout(removeRedGlow,1000); 
     userPattern.push(e.target.id);
     userClick++;
   } else if (e.target.id === "green") {
-    addGreenGlow();
+    // addGreenGlow();
+    setTimeout(addGreenGlow,0); 
+    setTimeout(removeGreenGlow,1000); 
     userPattern.push(e.target.id);
     userClick++;
   } else if (e.target.id === "blue") {
-    addBlueGlow();
+    // addBlueGlow();
+    setTimeout(addBlueGlow,0); 
+    setTimeout(removeBlueGlow,1000); 
     userPattern.push(e.target.id);
     userClick++;
   } else {
-    addYellowGlow();
+    // addYellowGlow();
+    setTimeout(addYellowGlow,0); 
+    setTimeout(removeYellowGlow,1000); 
     userPattern.push(e.target.id);
     userClick++;
   }
