@@ -69,4 +69,16 @@ which one comes first?
 ## Once game logic works what's next:
 // music
 
-
+leftover comments etc
+// set 10sec timeout to wait for userInput, once input is given check it, if correct move to the next round by round++ & cleartimeout
+// function validateTurn() {
+//   round++;
+//   console.log(round);
+//   // once the sequence's delivered wait for input, if nothing for 10sec -> gameOver
+//   let inputTimer = setTimeout(gameOver, 10000);
+//   // 1st check if it's correct pattern, if yes increment
+//   // checkPatterns();
+//   // takeUserInput(e);
+  
+//   console.log('it is working');
+// }
