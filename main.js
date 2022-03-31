@@ -46,7 +46,9 @@ function generateSimon() {
     let randomNumber = getRandomNumber();
      simonPattern.push(simonBoard[randomNumber]);
   }
-  console.log(simonPattern); 
+  // simonPattern.push("green", "blue","red", "yellow","red", "green", "blue","red", "yellow","red", "green", "blue")
+  // console.log(simonPattern); 
+  // return simonPattern;
   return simonPattern;
 }
 // generating random number for simon
@@ -64,40 +66,26 @@ function startGame() {
 // 2nd how can i have the computer show 1, (turn logic)
 // showSequence();
 function showSequence() {
-for (let i = 0; i < round; i++) {
-  // removeGlow();
+  
+for (let i = 0; i < 4; i++) {
     console.log(simonPattern[i])
-    // let timeToTrigger = i * 1000;
-    // console.log(timeToTrigger)
+    let timeToTrigger = i * 1000;
+    console.log(timeToTrigger)
     if (simonPattern[i]=== "red") {
-      // 0
-      // setTimeout(addRedGlow,timeToTrigger); 
-      // setTimeout(addRedGlow,0); 
-      setTimeout(addRedGlow,0); 
-      setTimeout(removeRedGlow,1000); 
+      setTimeout(addRedGlow,timeToTrigger); 
+      setTimeout(removeRedGlow,timeToTrigger + 500); 
     } else if (simonPattern[i]=== "green") {
-      // 1
-      // setTimeout(addGreenGlow,timeToTrigger);
-      // setTimeout(addGreenGlow,500);
-      setTimeout(addGreenGlow,500);
-      setTimeout(removeGreenGlow,1000);
+      setTimeout(addGreenGlow,timeToTrigger);
+      setTimeout(removeGreenGlow,timeToTrigger + 500);
     } else if (simonPattern[i]=== "blue") {
-      // 2
-      // setTimeout(addBlueGlow, timeToTrigger);
-      // setTimeout(addBlueGlow, 1000);
-      setTimeout(addBlueGlow,1000);
-      setTimeout(removeBlueGlow,1500);
-      // setTimeout(removeBlueGlow,2500); 
+      setTimeout(addBlueGlow,timeToTrigger);
+      setTimeout(removeBlueGlow,timeToTrigger + 500);
     } else {
-      // 3
-      // setTimeout(addYellowGlow,timeToTrigger);
-      // setTimeout(addYellowGlow,1500);
-      setTimeout(addYellowGlow,1500);
-      setTimeout(removeYellowGlow,2000);
-      // setTimeout(removeYellowGlow,3500);
+      setTimeout(addYellowGlow, timeToTrigger);
+      setTimeout(removeYellowGlow,timeToTrigger + 500);
     }
   }
-  // removeGlow();
+ 
   console.log(round);
 }
 
@@ -118,27 +106,23 @@ for (let i = 0; i < round; i++) {
 
 // record user input + put it in userPattern array & increment userClicks
 function takeUserInput(e) {
-  removeGlow();
+  // removeGlow();
   if (e.target.id === "red") {
-    // addRedGlow();
     setTimeout(addRedGlow,0); 
     setTimeout(removeRedGlow,1000); 
     userPattern.push(e.target.id);
     userClick++;
   } else if (e.target.id === "green") {
-    // addGreenGlow();
     setTimeout(addGreenGlow,0); 
     setTimeout(removeGreenGlow,1000); 
     userPattern.push(e.target.id);
     userClick++;
   } else if (e.target.id === "blue") {
-    // addBlueGlow();
     setTimeout(addBlueGlow,0); 
     setTimeout(removeBlueGlow,1000); 
     userPattern.push(e.target.id);
     userClick++;
   } else {
-    // addYellowGlow();
     setTimeout(addYellowGlow,0); 
     setTimeout(removeYellowGlow,1000); 
     userPattern.push(e.target.id);
@@ -150,6 +134,7 @@ function takeUserInput(e) {
   // whatever you want to use from here take it as a variable and put it in validateTurn
 }
 
+
 // compare user input with simon sequence, if they don't match -> gameOver(), if they do -> nextLvlCongrats() + increment turn, reset userClick
 function checkPatterns() {
   for (let i = 0; i < userPattern.length; i++) {
@@ -158,13 +143,12 @@ function checkPatterns() {
       userClick = 0;
     } else {
       nextLvlCongrats();
-      userClick = 0;
-      console.log(userClick);
-      round++;
-      console.log(round);
     }
+    userClick = 0;
+    console.log(userClick);
+    round++;
+    console.log("checking", round);
   }
-  removeGlow();
 }
 
 // check if user finished the game or not - max turn is 10
@@ -191,15 +175,22 @@ function gameWon() {
 // add glow class
 function addGreenGlow(){
   greenBtn.classList.add("green-anima");
+  console.log('add green');
+
 }
 function addYellowGlow(){
   yellowBtn.classList.add("yellow-anima");
+  console.log('add yellow');
+
 }
 function addRedGlow(){
   redBtn.classList.add("red-anima");
+  console.log('add red');
 }
 function addBlueGlow(){
   blueBtn.classList.add("blue-anima");
+  console.log('add blue');
+
 }
 // remove glow class
 function removeGlow() {
@@ -211,15 +202,22 @@ function removeGlow() {
 }
 function removeGreenGlow(){
   greenBtn.classList.remove("green-anima");
+  console.log('remove green');
 }
 function removeYellowGlow(){
   yellowBtn.classList.remove("yellow-anima");
+  console.log('remove yellow');
+
 }
 function removeRedGlow(){
   redBtn.classList.remove("red-anima");
+  console.log('remove red');
+
 }
 function removeBlueGlow(){
   blueBtn.classList.remove("blue-anima");
+  console.log('remove blue');
+
 }
 
 // reset the game

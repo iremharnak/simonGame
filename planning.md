@@ -13,7 +13,9 @@
 
 ## My game logic:
 
-there will be a 10sec time limit for the user to put input
+
+
+Shelved this idea-> (there will be a 10sec time limit for the user to put input)
 
 
 1- showSequence() {
