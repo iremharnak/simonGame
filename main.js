@@ -67,7 +67,7 @@ function startGame() {
 // showSequence();
 function showSequence() {
   
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < round; i++) {
     console.log(simonPattern[i])
     let timeToTrigger = i * 1000;
     console.log(timeToTrigger)
@@ -143,8 +143,8 @@ function checkPatterns() {
       userClick = 0;
     } else {
       nextLvlCongrats();
+      userClick = 0;
     }
-    userClick = 0;
     console.log(userClick);
     round++;
     console.log("checking", round);
@@ -176,12 +176,10 @@ function gameWon() {
 function addGreenGlow(){
   greenBtn.classList.add("green-anima");
   console.log('add green');
-
 }
 function addYellowGlow(){
   yellowBtn.classList.add("yellow-anima");
   console.log('add yellow');
-
 }
 function addRedGlow(){
   redBtn.classList.add("red-anima");
@@ -193,13 +191,6 @@ function addBlueGlow(){
 
 }
 // remove glow class
-function removeGlow() {
-  removeRedGlow();
-  removeYellowGlow();
-  removeBlueGlow();
-  removeGreenGlow();
-  console.log('removing class')
-}
 function removeGreenGlow(){
   greenBtn.classList.remove("green-anima");
   console.log('remove green');
