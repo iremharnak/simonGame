@@ -19,6 +19,7 @@ Shelved this idea-> (there will be a 10sec time limit for the user to put input)
 
 
 1- showSequence() {
+  2nd how can i have the computer show 1, (turn logic)
   Function triggered by startGame() click function
  (take in a color, show the animation- visual side)- this will run through looping through the array
 }
@@ -81,4 +82,37 @@ leftover comments etc
 //   // takeUserInput(e);
   
 //   console.log('it is working');
+// }
+
+// Another way of dealing with userClicks
+// user clicks, we take the color & compare to the 1st element of simonPattern, if wrong -> gameOver, if correct, trigger next animation & update userClick & check with the next simonPattern index/color
+
+
+// function takeUserInput(e) {
+//   if (e.target.id === "red") {
+//     setTimeout(addRedGlow,0); 
+//     setTimeout(removeRedGlow,1000); 
+//     console.log("I clicked red");
+//   } else if (e.target.id === "green") {
+//     setTimeout(addGreenGlow,0); 
+//     setTimeout(removeGreenGlow,1000); 
+//     console.log("I clicked green");
+//   } else if (e.target.id === "blue") {
+//     setTimeout(addBlueGlow,0); 
+//     setTimeout(removeBlueGlow,1000); 
+//     console.log("I clicked blue");
+//   } else {
+//     setTimeout(addYellowGlow,0); 
+//     setTimeout(removeYellowGlow,1000); 
+//     console.log("I clicked yellow");
+//   }
+//  for (let i = 0; i < round; i++) {
+//    if (e.target.id === simonPattern[i]) {
+//      console.log("right move");
+//      userClick++;
+//      console.log(userClick)
+//    } else {
+//      console.log("wrong move");
+//    }
+//  }
 // }

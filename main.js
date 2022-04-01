@@ -6,7 +6,7 @@
 let simonPattern = [];
 let userPattern = [];
 let userClick = 0;
-let round = 1;
+let round = 3;
 
 /*----- cached element references -----*/
 // board buttons
@@ -34,14 +34,14 @@ resetBtn.addEventListener('click', resetGame);
 
 // initilize full sequence, board & game
 function init() {
+  promptTxt.textContent = "LET'S PLAY";
   simonPattern = [];
   userPattern = [];
   userClick = 0;
   round = 1;
   generateSimon();
-  
 }
-// 1st generate simon seq (all the moves the computer will do) 
+// generate simon seq (all the moves the computer will do) 
 function generateSimon() {
   for (let i = 0; i < 10; i++) {
     let randomNumber = getRandomNumber();
@@ -58,14 +58,10 @@ function getRandomNumber() {
 // start btn function
 function startGame() {
   showSequence();
-  
 }
 
-
-// 2nd how can i have the computer show 1, (turn logic)
-// showSequence();
+// start showing sequence, this function is first run inside startGame click function. As the round is incremented, it will show more of the simonSequence
 function showSequence() {
-  
 for (let i = 0; i < round; i++) {
     let timeToTrigger = i * 1000;
     if (simonPattern[i]=== "red") {
@@ -82,7 +78,6 @@ for (let i = 0; i < round; i++) {
       setTimeout(removeYellowGlow,timeToTrigger + 500);
     }
   }
- 
 }
 
 
@@ -117,27 +112,21 @@ function takeUserInput(e) {
   } 
 }
 
-// compare user input with simon sequence, if they don't match -> gameOver(), if they do -> nextLvlCongrats() + increment turn, reset userClick
+// 4- compare user input with simon sequence, if they don't match -> gameOver(), if they do -> nextLvlCongrats() + increment turn, reset userClick
 function checkPatterns() {
   for (let i = 0; i < userPattern.length; i++) {
     if (userPattern[i] !== simonPattern[i]) {
       gameOver();
       // userClick = 0;
       userPattern = [];
-    } else {
-      nextLvlCongrats();
+   }
+    nextLvlCongrats();
     userPattern = [];
     userClick = 0;
     round++;
-    showSequence();
-    }
-   }
-    // nextLvlCongrats();
-    // userPattern = [];
-    // userClick = 0;
-    // round++;
-    // showSequence();
+    setTimeout(showSequence,5000);
   }
+}
 
 // check if user finished the game or not - max turn is 10
 function checkWinner() {
@@ -151,7 +140,7 @@ function checkWinner() {
 
 // functions updating promptTxt
 function nextLvlCongrats() {
-  promptTxt.textContent = "GREAT! ON TO THE NEXT!";
+  promptTxt.textContent = `GREAT! ON TO ROUND ${round} !`;
   console.log("nextlvl msg");
 
 }
@@ -161,8 +150,10 @@ function gameOver() {
 function gameWon() {
   promptTxt.textContent = "CONGRATS! YOU WON!";
 }
+
 // button animation functions
 // add glow class
+
 function addGreenGlow(){
   greenBtn.classList.add("green-anima");
   // console.log('add green');
@@ -178,8 +169,8 @@ function addRedGlow(){
 function addBlueGlow(){
   blueBtn.classList.add("blue-anima");
   // console.log('add blue');
-
 }
+
 // remove glow class
 function removeGreenGlow(){
   greenBtn.classList.remove("green-anima");
@@ -188,22 +179,18 @@ function removeGreenGlow(){
 function removeYellowGlow(){
   yellowBtn.classList.remove("yellow-anima");
   // console.log('remove yellow');
-
 }
 function removeRedGlow(){
   redBtn.classList.remove("red-anima");
   // console.log('remove red');
-
 }
 function removeBlueGlow(){
   blueBtn.classList.remove("blue-anima");
   // console.log('remove blue');
-
 }
 
 // reset the game
 function resetGame() {
-  removeGlow();
   init();
   console.log("once")
 }
