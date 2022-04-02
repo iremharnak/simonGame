@@ -6,7 +6,7 @@
 let simonPattern = [];
 
 let userClick = 0;
-let round = 3;
+let round = 1;
 let isGameOver = false;
 /*----- cached element references -----*/
 // board buttons
@@ -36,7 +36,6 @@ resetBtn.addEventListener('click', resetGame);
 function init() {
   promptTxt.textContent = "LET'S PLAY";
   simonPattern = [];
-  userPattern = [];
   userClick = 0;
   round = 1;
   generateSimon();
@@ -84,12 +83,13 @@ for (let i = 0; i < round; i++) {
 // take user input and compare it to simonPattern as we go along, if the input is wrong, game over, if correct, we move to the next round
 
 function takeUserInput(e) {
-  
+  console.log(simonPattern)
+  console.log(userClick)
   if  (e.target.id !== simonPattern[userClick]) {
     gameOver();
     // round = 1;
     // userClick= 0;
-    console.log("hello");
+    console.log("hello, game over");
     return;
   }
     switch (e.target.id) {
@@ -110,30 +110,27 @@ function takeUserInput(e) {
             setTimeout(removeYellowGlow,500); 
             break;
     }
+  console.log(isGameOver);
+  console.log("this is", round)
+  if (shouldStartNewRound()){
+  nextLvlCongrats();
+  setTimeout(showSequence,3000);
+} else {
   userClick++;
-  console.log("User click is", userClick);
-  // round++;
-  console.log("Round now is", round);
-  if (!gameOver()) {
-    nextLvlCongrats();
-    setTimeout(showSequence,3000);
-  }
-  // nextLvlCongrats();
-  // setTimeout(showSequence,3000);
+}
 }
 
+function shouldStartNewRound() {
+  return !isGameOver && userClick === round - 1;
+}
 
+if (!isGameOver && userClick === round -1){
+  nextLvlCongrats();
+  setTimeout(showSequence,3000);
+} else {
+  userClick++;
+}
 
-
-// another variation of checkPatterns
-// function checkPatterns(){
-//   for (let i = 0; i < userPattern.length; i++) {
-//     if (userPattern[i] !== simonPattern[i]) {
-//       return false;
-//     }
-//   }
-//   return true;
-// }
 // check if user finished the game or not - max turn is 10
 function checkWinner() {
   if (userPattern.length >= simonPattern.length) {

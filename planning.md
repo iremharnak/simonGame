@@ -168,3 +168,12 @@ let userPattern = [];
 //     setTimeout(showSequence,3000);
 //   }
 // }
+// another variation of checkPatterns
+// function checkPatterns(){
+//   for (let i = 0; i < userPattern.length; i++) {
+//     if (userPattern[i] !== simonPattern[i]) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
