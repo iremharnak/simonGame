@@ -4,10 +4,10 @@
 /*----- app's state (variables) -----*/
 // simonPattern will hold all the sequences randomly generated with init
 let simonPattern = [];
-let userPattern = [];
+
 let userClick = 0;
 let round = 3;
-
+let isGameOver = false;
 /*----- cached element references -----*/
 // board buttons
 const redBtn = document.getElementById("red");
@@ -81,53 +81,59 @@ for (let i = 0; i < round; i++) {
 }
 
 
-// record user input + put it in userPattern array & increment userClicks
+// take user input and compare it to simonPattern as we go along, if the input is wrong, game over, if correct, we move to the next round
+
 function takeUserInput(e) {
-  if (e.target.id === "red") {
-    setTimeout(addRedGlow,0); 
-    setTimeout(removeRedGlow,1000); 
-    userPattern.push(e.target.id);
-    userClick++;
-  } else if (e.target.id === "green") {
-    setTimeout(addGreenGlow,0); 
-    setTimeout(removeGreenGlow,1000); 
-    userPattern.push(e.target.id);
-    userClick++;
-  } else if (e.target.id === "blue") {
-    setTimeout(addBlueGlow,0); 
-    setTimeout(removeBlueGlow,1000); 
-    userPattern.push(e.target.id);
-    userClick++;
-  } else {
-    setTimeout(addYellowGlow,0); 
-    setTimeout(removeYellowGlow,1000); 
-    userPattern.push(e.target.id);
-    userClick++;
+  
+  if  (e.target.id !== simonPattern[userClick]) {
+    gameOver();
+    // round = 1;
+    // userClick= 0;
+    console.log("hello");
+    return;
   }
-  if (userPattern.length === round) {
-  console.log("User pattern is:", userPattern);
-  console.log("User pattern length is:", userPattern.length);
-  console.log("Round is:", round);
-  checkPatterns();
-  } 
-}
-
-// 4- compare user input with simon sequence, if they don't match -> gameOver(), if they do -> nextLvlCongrats() + increment turn, reset userClick
-function checkPatterns() {
-  for (let i = 0; i < userPattern.length; i++) {
-    if (userPattern[i] !== simonPattern[i]) {
-      gameOver();
-      // userClick = 0;
-      userPattern = [];
-   }
+    switch (e.target.id) {
+      case "red":
+            setTimeout(addRedGlow,0); 
+            setTimeout(removeRedGlow,500); 
+            break;
+      case "green":
+            setTimeout(addGreenGlow,0); 
+            setTimeout(removeGreenGlow,500); 
+            break;
+      case "blue":
+            setTimeout(addBlueGlow,0); 
+            setTimeout(removeBlueGlow,500); 
+            break;
+      case "yellow":
+            setTimeout(addYellowGlow,0); 
+            setTimeout(removeYellowGlow,500); 
+            break;
+    }
+  userClick++;
+  console.log("User click is", userClick);
+  // round++;
+  console.log("Round now is", round);
+  if (!gameOver()) {
     nextLvlCongrats();
-    userPattern = [];
-    userClick = 0;
-    round++;
-    setTimeout(showSequence,5000);
+    setTimeout(showSequence,3000);
   }
+  // nextLvlCongrats();
+  // setTimeout(showSequence,3000);
 }
 
+
+
+
+// another variation of checkPatterns
+// function checkPatterns(){
+//   for (let i = 0; i < userPattern.length; i++) {
+//     if (userPattern[i] !== simonPattern[i]) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
 // check if user finished the game or not - max turn is 10
 function checkWinner() {
   if (userPattern.length >= simonPattern.length) {
@@ -141,11 +147,12 @@ function checkWinner() {
 // functions updating promptTxt
 function nextLvlCongrats() {
   promptTxt.textContent = `GREAT! ON TO ROUND ${round} !`;
-  console.log("nextlvl msg");
-
+  userClick = 0;
+  round++;
 }
 function gameOver() {
   promptTxt.textContent = "BUMMER!  HIT RESET TO  TRY AGAIN";
+  isGameOver = true;
 }
 function gameWon() {
   promptTxt.textContent = "CONGRATS! YOU WON!";
@@ -191,6 +198,7 @@ function removeBlueGlow(){
 
 // reset the game
 function resetGame() {
+  isGameOver = false;
   init();
   console.log("once")
 }

@@ -84,9 +84,43 @@ leftover comments etc
 //   console.log('it is working');
 // }
 
+<!-- record user input + put it in userPattern array & increment userClicks
+ -->
+ <!-- function takeUserInput(e) {
+  if (e.target.id === "red") {
+    setTimeout(addRedGlow,0); 
+    setTimeout(removeRedGlow,500); 
+    userPattern.push(e.target.id);
+    if  (e.target.id !== simonPattern[userClick]) {
+      gameOver();
+    };
+    // use switch instead of if else 
+    // userClick++; write this at the end
+  } else if (e.target.id === "green") {
+    setTimeout(addGreenGlow,0); 
+    setTimeout(removeGreenGlow,500); 
+    userPattern.push(e.target.id);
+    userClick++;
+  } else if (e.target.id === "blue") {
+    setTimeout(addBlueGlow,0); 
+    setTimeout(removeBlueGlow,500); 
+    userPattern.push(e.target.id);
+    userClick++;
+  } else {
+    setTimeout(addYellowGlow,0); 
+    setTimeout(removeYellowGlow,500); 
+    userPattern.push(e.target.id);
+    userClick++;
+  }
+  if (userPattern.length === round) {
+    console.log("User pattern is:", userPattern);
+    console.log("User pattern length is:", userPattern.length);
+    console.log("Round is:", round);
+    checkPatterns();
+    } 
+} -->
 // Another way of dealing with userClicks
 // user clicks, we take the color & compare to the 1st element of simonPattern, if wrong -> gameOver, if correct, trigger next animation & update userClick & check with the next simonPattern index/color
-
 
 // function takeUserInput(e) {
 //   if (e.target.id === "red") {
@@ -115,4 +149,22 @@ leftover comments etc
 //      console.log("wrong move");
 //    }
 //  }
+// }
+
+# leftover code
+let userPattern = [];
+// 4- compare user input with simon sequence, if they don't match -> gameOver(), if they do -> nextLvlCongrats() + increment turn, reset userClick
+// function checkPatterns() {
+//   for (let i = 0; i < userPattern.length; i++) {
+//     if (userPattern[i] !== simonPattern[i]) {
+//       gameOver();
+//       // userClick = 0;
+//       userPattern = [];
+//    }
+//     nextLvlCongrats();
+//     userPattern = [];
+//     userClick = 0;
+//     round++;
+//     setTimeout(showSequence,3000);
+//   }
 // }
