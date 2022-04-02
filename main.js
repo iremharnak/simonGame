@@ -83,12 +83,9 @@ for (let i = 0; i < round; i++) {
 // take user input and compare it to simonPattern as we go along, if the input is wrong, game over, if correct, we move to the next round
 
 function takeUserInput(e) {
-  console.log(simonPattern)
-  console.log(userClick)
+  
   if  (e.target.id !== simonPattern[userClick]) {
     gameOver();
-    // round = 1;
-    // userClick= 0;
     console.log("hello, game over");
     return;
   }
@@ -110,32 +107,27 @@ function takeUserInput(e) {
             setTimeout(removeYellowGlow,500); 
             break;
     }
-  console.log(isGameOver);
-  console.log("this is", round)
+  
   if (shouldStartNewRound()){
   nextLvlCongrats();
+  if (!winner()) {
   setTimeout(showSequence,3000);
+  }
 } else {
   userClick++;
-}
+} 
 }
 
+// If it's not gameOver and the last userClick is round -1, this way we wait for userClicks to be complete 
 function shouldStartNewRound() {
+  // the last userClick turn for the round is the roundNumber - 1
   return !isGameOver && userClick === round - 1;
 }
 
-if (!isGameOver && userClick === round -1){
-  nextLvlCongrats();
-  setTimeout(showSequence,3000);
-} else {
-  userClick++;
-}
 
 // check if user finished the game or not - max turn is 10
-function checkWinner() {
-  if (userPattern.length >= simonPattern.length) {
-    // you need another variable like maxTurn
-    // or >= simonPatterns.length
+function winner() {
+  if (round >= simonPattern.length + 1) {
     gameWon();
     return true;
   }
