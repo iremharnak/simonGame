@@ -11,9 +11,10 @@
 // 6- Is the UserInput done? (how to check?)
 // 7- If done, compare userInput arr with simonPatterns
 
+<!-- more features to think about -->
+  // + add more special features to test your ability to continue with more advance logic, what happens if we want to add a color? User wanting to put their own color? Quick mode? Slow etc. A sequence that doesn't build on, on/off switch, scoring system for each option (high score system, ability to type in your name, scoreboard)
+
 ## My game logic:
-
-
 
 Shelved this idea-> (there will be a 10sec time limit for the user to put input)
 

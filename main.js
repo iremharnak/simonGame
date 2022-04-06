@@ -1,23 +1,27 @@
 /*----- constants -----*/
   const simonBoard = ["red", "green", "blue", "yellow"];
+  const redSound = new Audio("assets/redSimon.mp3");
+  const greenSound = new Audio("assets/greenSimon.mp3");
+  const blueSound = new Audio("assets/blueSimon.mp3");
+  const yellowSound = new Audio("assets/yellowSimon.mp3");
+  const winnerSound = new Audio("assets/winner.mp3");
+  const looserSound = new Audio("assets/looser.mp3");
+
 
 /*----- app's state (variables) -----*/
-// simonPattern will hold all the sequences randomly generated with init
 let simonPattern = [];
-
 let userClick = 0;
 let round = 1;
 let isGameOver = false;
+let animationTime = 500;
 /*----- cached element references -----*/
 // board buttons
 const redBtn = document.getElementById("red");
 const greenBtn = document.getElementById("green");
 const blueBtn = document.getElementById("blue");
 const yellowBtn = document.getElementById("yellow");
-
 // prompt text so I can update its content when it's player's/computer's turn & win/loose messages
 const promptTxt = document.getElementById("promptTxt");
-
 // buttons to start and reset the game
 const startBtn = document.getElementById("startBtn");
 const resetBtn = document.getElementById("resetBtn");
@@ -65,16 +69,16 @@ for (let i = 0; i < round; i++) {
     let timeToTrigger = i * 1000;
     if (simonPattern[i]=== "red") {
       setTimeout(addRedGlow,timeToTrigger); 
-      setTimeout(removeRedGlow,timeToTrigger + 500); 
+      setTimeout(removeRedGlow,timeToTrigger + animationTime); 
     } else if (simonPattern[i]=== "green") {
       setTimeout(addGreenGlow,timeToTrigger);
-      setTimeout(removeGreenGlow,timeToTrigger + 500);
+      setTimeout(removeGreenGlow,timeToTrigger + animationTime);
     } else if (simonPattern[i]=== "blue") {
       setTimeout(addBlueGlow,timeToTrigger);
-      setTimeout(removeBlueGlow,timeToTrigger + 500);
+      setTimeout(removeBlueGlow,timeToTrigger + animationTime);
     } else {
       setTimeout(addYellowGlow, timeToTrigger);
-      setTimeout(removeYellowGlow,timeToTrigger + 500);
+      setTimeout(removeYellowGlow,timeToTrigger + animationTime);
     }
   }
 }
@@ -89,22 +93,25 @@ function takeUserInput(e) {
     console.log("hello, game over");
     return;
   }
+  
     switch (e.target.id) {
       case "red":
             setTimeout(addRedGlow,0); 
-            setTimeout(removeRedGlow,500); 
+            setTimeout(removeRedGlow,animationTime); 
             break;
       case "green":
             setTimeout(addGreenGlow,0); 
-            setTimeout(removeGreenGlow,500); 
+            setTimeout(removeGreenGlow,animationTime); 
             break;
       case "blue":
             setTimeout(addBlueGlow,0); 
-            setTimeout(removeBlueGlow,500); 
+            setTimeout(removeBlueGlow,animationTime); 
             break;
       case "yellow":
             setTimeout(addYellowGlow,0); 
-            setTimeout(removeYellowGlow,500); 
+            setTimeout(removeYellowGlow,animationTime); 
+            // create a function that takes in a color & will do the same thing. 
+        
             break;
     }
   
@@ -118,12 +125,12 @@ function takeUserInput(e) {
 } 
 }
 
+
 // If it's not gameOver and the last userClick is round -1, this way we wait for userClicks to be complete 
 function shouldStartNewRound() {
   // the last userClick turn for the round is the roundNumber - 1
   return !isGameOver && userClick === round - 1;
 }
-
 
 // check if user finished the game or not - max turn is 10
 function winner() {
@@ -133,6 +140,10 @@ function winner() {
   }
 }
 
+// adding removing colors
+function glow() {
+
+}
 // functions updating promptTxt
 function nextLvlCongrats() {
   promptTxt.textContent = `GREAT! ON TO ROUND ${round} !`;
@@ -141,10 +152,12 @@ function nextLvlCongrats() {
 }
 function gameOver() {
   promptTxt.textContent = "BUMMER!  HIT RESET TO  TRY AGAIN";
+  looserSound.play();
   isGameOver = true;
 }
 function gameWon() {
   promptTxt.textContent = "CONGRATS! YOU WON!";
+  winnerSound.play();
 }
 
 // button animation functions
@@ -152,37 +165,33 @@ function gameWon() {
 
 function addGreenGlow(){
   greenBtn.classList.add("green-anima");
-  // console.log('add green');
+  greenSound.play();
 }
 function addYellowGlow(){
   yellowBtn.classList.add("yellow-anima");
-  // console.log('add yellow');
+  yellowSound.play();
 }
 function addRedGlow(){
   redBtn.classList.add("red-anima");
-  // console.log('add red');
+  redSound.play();
 }
 function addBlueGlow(){
   blueBtn.classList.add("blue-anima");
-  // console.log('add blue');
+  blueSound.play();
 }
 
 // remove glow class
 function removeGreenGlow(){
   greenBtn.classList.remove("green-anima");
-  // console.log('remove green');
 }
 function removeYellowGlow(){
   yellowBtn.classList.remove("yellow-anima");
-  // console.log('remove yellow');
 }
 function removeRedGlow(){
   redBtn.classList.remove("red-anima");
-  // console.log('remove red');
 }
 function removeBlueGlow(){
   blueBtn.classList.remove("blue-anima");
-  // console.log('remove blue');
 }
 
 // reset the game
