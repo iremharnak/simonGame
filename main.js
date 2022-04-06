@@ -65,6 +65,7 @@ function startGame() {
 
 // start showing sequence, this function is first run inside startGame click function. As the round is incremented, it will show more of the simonSequence
 function showSequence() {
+
 for (let i = 0; i < round; i++) {
     let timeToTrigger = i * 1000;
     if (simonPattern[i]=== "red") {
@@ -87,12 +88,12 @@ for (let i = 0; i < round; i++) {
 // take user input and compare it to simonPattern as we go along, if the input is wrong, game over, if correct, we move to the next round
 
 function takeUserInput(e) {
-  
+
   if  (e.target.id !== simonPattern[userClick]) {
     gameOver();
     console.log("hello, game over");
     return;
-  }
+  } 
   
     switch (e.target.id) {
       case "red":
