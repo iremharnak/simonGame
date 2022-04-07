@@ -126,7 +126,7 @@ function takeUserInput(e) {
 } 
 }
 
-
+// an object that bundles together 
 // If it's not gameOver and the last userClick is round -1, this way we wait for userClicks to be complete 
 function shouldStartNewRound() {
   // the last userClick turn for the round is the roundNumber - 1
@@ -142,9 +142,9 @@ function winner() {
 }
 
 // adding removing colors
-function glow() {
+// function glow() {
 
-}
+// }
 // functions updating promptTxt
 function nextLvlCongrats() {
   promptTxt.textContent = `GREAT! ON TO ROUND ${round} !`;
