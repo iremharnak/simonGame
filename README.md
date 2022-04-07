@@ -29,8 +29,8 @@ Wait for the sound & colour sequence started by the computer. When it's your tur
 
 ## Screenshots of the Game
 
-<img src="assets/startGame-simon.png">
-<img src="assets/gameOver-simon.png">
+<img src="assets/simonStart.png">
+<img src="assets/simonGameOver.png">
 
 ## Flowchart for game play
 
