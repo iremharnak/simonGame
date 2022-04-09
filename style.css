@@ -16,6 +16,7 @@ main {
 .copy {
   align-self: center;
   width: 50%;
+  padding-top: 60px;
   margin-right: 60px;
   line-height: 2;
 }
