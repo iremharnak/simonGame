@@ -14,13 +14,14 @@ let userClick = 0;
 let round = 1;
 let isGameOver = false;
 let animationTime = 500;
+
 /*----- cached element references -----*/
 // board buttons
 const redBtn = document.getElementById("red");
 const greenBtn = document.getElementById("green");
 const blueBtn = document.getElementById("blue");
 const yellowBtn = document.getElementById("yellow");
-// prompt text so I can update its content when it's player's/computer's turn & win/loose messages
+// prompt text so I can update its content at each round & win/loose messages
 const promptTxt = document.getElementById("promptTxt");
 // buttons to start and reset the game
 const startBtn = document.getElementById("startBtn");
@@ -44,7 +45,7 @@ function init() {
   round = 1;
   generateSimon();
 }
-// generate simon seq (all the moves the computer will do) 
+// generate simon seq (all the moves the computer will make) 
 function generateSimon() {
   for (let i = 0; i < 10; i++) {
     let randomNumber = getRandomNumber();
@@ -111,8 +112,8 @@ function takeUserInput(e) {
       case "yellow":
             setTimeout(addYellowGlow,0); 
             setTimeout(removeYellowGlow,animationTime); 
-            // create a function that takes in a color & will do the same thing. 
-        
+            
+  
             break;
     }
   
@@ -126,7 +127,7 @@ function takeUserInput(e) {
 } 
 }
 
-// an object that bundles together 
+
 // If it's not gameOver and the last userClick is round -1, this way we wait for userClicks to be complete 
 function shouldStartNewRound() {
   // the last userClick turn for the round is the roundNumber - 1
@@ -141,11 +142,7 @@ function winner() {
   }
 }
 
-// adding removing colors
-// function glow() {
-
-// }
-// functions updating promptTxt
+// functions updating promptTxt & gameplay
 function nextLvlCongrats() {
   promptTxt.textContent = `GREAT! ON TO ROUND ${round} !`;
   userClick = 0;
